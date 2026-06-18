@@ -3,11 +3,13 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app=express();
+const routes=require("./routes/routes");
 app.use(cors());
 app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("API Runnning Successfully");
 });
+app.use("/api",routes);
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("Mongoose Working"))
 .catch(err=>console.log(err));
