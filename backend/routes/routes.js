@@ -4,6 +4,7 @@ const Client=require("../models/client");
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs");
 const client = require("../models/client");
+const auth = require("../middleware/auth");
 router.post("/register",async(req,res)=>{
     try{
         const {name,email,password}=req.body;
@@ -53,5 +54,11 @@ router.post("/login",async(req,res)=>{
     catch(err){
         res.status(500).json({error:err.message});
     }
+});
+router.get("/dashboard",auth,(req,res)=>{
+    res.json({
+        msg:"Welcome To Dashboard",
+        client:req.client
+    });
 });
 module.exports=router;
