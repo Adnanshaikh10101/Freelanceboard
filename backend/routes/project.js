@@ -18,3 +18,12 @@ router.post("/create",auth,async(req,res)=>{
         res.status(500).json({error:err.message});
     }
 });
+router.get("/my-projects",auth,async(req,res)=>{
+    try{
+        const projects=await Project.find({client:req.client.id});
+        res.json(projects);
+    }catch(err){
+        res.status(500).json({error:err.msg});
+    }
+});
+router.get("/all",auth,async(req,res))
