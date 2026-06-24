@@ -14,11 +14,11 @@ const projectSchema=new mongoose.Schema({
     },
     status:{
         type:String,
-        default:pending
+        default:"pending"
     },
     client:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"client"
+        ref:"clients"
     }
 },{timestamps:true});
 module.exports=mongoose.model("project",projectSchema);
