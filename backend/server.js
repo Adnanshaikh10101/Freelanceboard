@@ -12,6 +12,7 @@ app.get("/",(req,res)=>{
 });
 app.use("/api",project);
 app.use("/api",routes);
+app.use("/upload",express.static("upload"));
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("Mongoose Working"))
 .catch(err=>console.log(err));

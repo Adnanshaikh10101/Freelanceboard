@@ -4,6 +4,7 @@ const Project=require("../models/project");
 const auth=require("../middleware/auth");
 const admin= require("../middleware/admin");
 const project = require("../models/project");
+const upload = require("../middleware/upload");
 router.post("/create",auth,async(req,res)=>{
     try{
         const {title,description,budget}=req.body;
@@ -58,6 +59,21 @@ router.put("/update/:id", auth, async (req, res) => {
     }
     catch (err) {
         res.status(500).json({ error: err.message });
+    }
+});
+router.post("/upload/:id",auth,admin,upload.single("file"),async(req,res)=>{
+    try{
+        const project = await Project.findById(req.params.id);
+        project.file=req.file.filename;
+        project.status="Completed";
+        await project.save();
+        res.json({
+            msg:"File Uploaded Successfully",
+            file:project.file
+        });
+    }
+    catch(err){
+        res.status(500).json({error:err.message});
     }
 });
 module.exports=router;
