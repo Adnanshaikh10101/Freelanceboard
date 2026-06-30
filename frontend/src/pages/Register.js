@@ -1,6 +1,5 @@
 import React,{useState} from "react";
 import API from "../services/api";
-import e from "cors";
 function Register(){
     const [form,setform] = useState({
         name:"",
