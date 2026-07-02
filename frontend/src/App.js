@@ -2,13 +2,17 @@ import { BrowserRouter,Routes,Route } from "react-router-dom";
 import Upload from "./pages/Upload";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import ProtectRoute from "./components/ProtectedRoute";
+import Dashboard from "./pages/Dashboard";
 function App(){
   return(
   <BrowserRouter>
   <Routes>
-    <Route path="/upload" element={<Upload/>}/>
+    <Route path="/upload" element={
+      <ProtectRoute><Upload/></ProtectRoute>}/>
     <Route path="/register" element={<Register/>}/>
     <Route path="/login" element={<Login/>}/>
+    <Route path="/dashboard" element={<Dashboard/>}/>
     </Routes>
     </BrowserRouter>
   )

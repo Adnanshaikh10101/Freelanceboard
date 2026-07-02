@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import React , {useState} from "react";
 import API from "../services/api";
 function Login(){
+    const navigate = useNavigate();
     const [form ,setform] = useState({
         email:"",
         password:""
@@ -10,6 +12,7 @@ function Login(){
             const res = await API.post("/login",form);
             localStorage.setItem("token",res.data.token);
             alert("Login Successfull");
+            navigate("/dashboard");
         }
         catch(err){
             console.log(err);
