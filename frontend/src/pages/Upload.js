@@ -6,7 +6,7 @@ function Upload(){
         const formData = new FormData();
         formData.append("file",file);
         try{
-            const res = await API.post("/upload",formData);
+            const res = await API.post("/upload/:id",formData);
             alert("Uploaded Successfully");
             console.log(res.data);
         }

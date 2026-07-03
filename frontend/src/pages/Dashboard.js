@@ -16,16 +16,20 @@ function Dashboard(){
         alert("Logout Successfully");
         navigate("/login")
     }
-    const fetchfiles = async() =>{
+    const fetchfiles = async () => {
+    try {
         const res = await API.get("/all");
         setFiles(res.data);
+    } catch (err) {
+        console.log("ERROR:", err.response?.data || err.message);
     }
+};
     return(
     <div className="dashboard">
     <h2>All Projects</h2>
     {files.map((file)=>(
-        <div key={file.id}>
-            <p>file.filename</p>
+        <div key={file._id}>
+            <p>{file.file}</p>
             <a 
             href={`http://localhost:5000/${file.path}`}
             target="_blank"

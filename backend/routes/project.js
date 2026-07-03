@@ -34,6 +34,7 @@ router.get("/all",auth,admin,async(req,res)=>{
         const projects=await Project.find().populate("client","name email");
         res.json(projects);
     }catch(err){
+        console.log(err);
         res.status(500).json({error:err.message});
     }
 });
