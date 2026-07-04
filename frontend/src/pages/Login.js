@@ -11,6 +11,7 @@ function Login(){
         try{
             const res = await API.post("/login",form);
             localStorage.setItem("token",res.data.token);
+            localStorage.setItem("role",res.data.client.role);
             alert("Login Successfull");
             navigate("/dashboard");
         }

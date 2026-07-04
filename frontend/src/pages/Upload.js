@@ -1,8 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import API from "../services/api";
-
+import { useNavigate } from "react-router-dom";
 function Upload(){
-
+    const navigate = useNavigate();
+     const role = localStorage.getItem("role");
+        if(role!=="admin"){
+            alert("Only Admin Can Access!");
+            navigate("/dashboard");
+        }
     const [file, setfile] = useState(null);
     const [projects, setProjects] = useState([]);
     const [selectedProject, setSelectedProject] = useState("");
