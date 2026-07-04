@@ -1,6 +1,10 @@
 /* Navbar Container */
+body{
+  margin:0;
+  background: whitesmoke;
+}
 .navbar {
-    position: fixed;
+  position: fixed;
     top:0;
     left:0;           /* stick to top */
     width: 100%;
@@ -23,7 +27,8 @@
 /* Links container */
 .nav-links {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
     gap: 20px;
 }
 
@@ -53,4 +58,7 @@
 
 .logout-btn:hover {
     background-color: #71eee8;
+}
+.Home{
+  padding-top: 30px;
 }
