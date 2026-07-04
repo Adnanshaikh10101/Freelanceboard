@@ -18,7 +18,7 @@ function Dashboard(){
     }
     const fetchfiles = async () => {
     try {
-        const res = await API.get("/all");
+        const res = await API.get("/my-projects");
         setFiles(res.data);
     } catch (err) {
         console.log("ERROR:", err.response?.data || err.message);
