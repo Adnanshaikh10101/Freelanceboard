@@ -1,13 +1,56 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* Navbar Container */
+.navbar {
+    position: fixed;
+    top:0;
+    left:0;           /* stick to top */
+    width: 100%;
+    height: 50px;
+    background-color: #ffffff; /* dark modern color */
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    border-bottom:2px solid rgb(6, 199, 32); 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Logo */
+.navbar img {
+    height: 150px;   /* increase this */
+    width: auto;
+    margin-top: 4px;
+    transform: scale(1.2); /* 🔥 MAGIC LINE */
+}
+
+/* Links container */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* Links style */
+.nav-links a {
+    text-decoration: none;
+    color: rgb(6, 199, 32);
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #00b536;
+}
+
+/* Logout Button */
+.logout-btn {
+    background-color: #0beb82;
+    border: none;
+    padding: 6px 12px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #71eee8;
 }
