@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import React , {useState} from "react";
 import API from "../services/api";
+import "../index.css";
 function Login(){
     const navigate = useNavigate();
     const [form ,setform] = useState({

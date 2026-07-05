@@ -1,12 +1,19 @@
 /* Navbar Container */
-body{
-  margin:0;
-  background: whitesmoke;
+body {
+  margin:0;  
+  display: wrap;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-.navbar {
-  position: fixed;
-    top:0;
-    left:0;           /* stick to top */
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.navbar {          /* stick to top */
     width: 100%;
     height: 50px;
     background-color: #ffffff; /* dark modern color */
@@ -18,10 +25,10 @@ body{
 
 /* Logo */
 .navbar img {
-    height: 150px;   /* increase this */
+    height: 120px;   /* increase this */
     width: auto;
-    margin-top: 4px;
-    transform: scale(1.2); /* 🔥 MAGIC LINE */
+    margin-top: 12px;
+    transform: scale(1.5); /* 🔥 MAGIC LINE */
 }
 
 /* Links container */
@@ -35,7 +42,7 @@ body{
 /* Links style */
 .nav-links a {
     text-decoration: none;
-    color: rgb(6, 199, 32);
+    color: rgb(0, 223, 89);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bold;
     transition: 0.3s;
@@ -59,6 +66,6 @@ body{
 .logout-btn:hover {
     background-color: #71eee8;
 }
-.Home{
-  padding-top: 30px;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

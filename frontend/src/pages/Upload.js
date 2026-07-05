@@ -1,18 +1,13 @@
 import React, { useState, useEffect} from "react";
 import API from "../services/api";
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+import "../index.css";
 function Upload(){
-    const navigate = useNavigate();
-     const role = localStorage.getItem("role");
-        if(role!=="admin"){
-            alert("Only Admin Can Access!");
-            navigate("/dashboard");
-        }
     const [file, setfile] = useState(null);
     const [projects, setProjects] = useState([]);
     const [selectedProject, setSelectedProject] = useState("");
-
-    // ✅ Fetch all projects
+    const role = localStorage.getItem("role");
+    
     useEffect(()=>{
         fetchProjects();
     },[]);
@@ -30,8 +25,6 @@ function Upload(){
             console.log(err.response?.data);
         }
     };
-
-    // ✅ Upload file
     const handleupload = async()=>{
         if(!file || !selectedProject){
             alert("Select project and file");
@@ -57,12 +50,14 @@ function Upload(){
             console.log(err.response?.data);
         }
     }
+    if(role!=="admin"){
+        alert("Only Admin Can Access");
+        return <Navigate to="/dashboard" replace/>
+    }
 
     return(
         <div className="Upload">
             <h2>Upload File</h2>
-
-            {/* ✅ Select Project */}
             <select onChange={(e)=> setSelectedProject(e.target.value)}>
                 <option value="">Select Project</option>
                 {projects.map((project)=>(
@@ -73,8 +68,6 @@ function Upload(){
             </select>
 
             <br/><br/>
-
-            {/* ✅ File Input */}
             <input 
                 type="file" 
                 onChange={(e)=> setfile(e.target.files[0])}
