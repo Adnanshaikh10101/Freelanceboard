@@ -8,8 +8,7 @@ function Navbar() {
             <img src={logo} alt="logo" width="100"/>    
             <div className="nav-links">
                 <Link to="/">Home</Link>
-                <Link to="/about">About</Link>
-                <Link to="/upload">Upload</Link>
+                <Link to="/upload">Admin</Link>
                 <Link to="/dashboard">Dashboard</Link>
                 <Link to="/login">Login</Link>
                 <Link to="/register">Register</Link>

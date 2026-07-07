@@ -1,12 +1,14 @@
 /* Navbar Container */
 body {
-  margin:0;  
-  display: wrap;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    background-color: #030b53;
+    margin:0;  
+    display: wrap;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: white;
 }
 
 code {
@@ -16,11 +18,11 @@ code {
 .navbar {          /* stick to top */
     width: 100%;
     height: 50px;
-    background-color: #ffffff; /* dark modern color */
+    background-color: #030b53; /* dark modern color */
     display: flex;
     align-items: center;
     justify-content: space-between; 
-    border-bottom:2px solid rgb(6, 199, 32); 
+    border-bottom:2px solid #030b53; 
 }
 
 /* Logo */
@@ -42,14 +44,14 @@ code {
 /* Links style */
 .nav-links a {
     text-decoration: none;
-    color: rgb(6, 199, 32);
+    color: rgb(255, 255, 255);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: bold;
     transition: 0.3s;
 }
 
 .nav-links a:hover {
-    color: #00b536;
+    color: #f0fc47;
 }
 
 /* Logout Button */
