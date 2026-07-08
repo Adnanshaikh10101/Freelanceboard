@@ -1,22 +1,11 @@
 import React,{useEffect,useState } from "react";
 import API from "../services/api";
-import { Navigate,useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 import "../index.css";
 function Dashboard(){
     const [files,setFiles]= useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
-    useEffect(()=>{
-        fetchfiles();
-    },[]);
-    if(!token){
-        return(<Navigate to="/login"/>)
-    }
-    const handlelogout = async()=>{
-        localStorage.removeItem("token");
-        alert("Logout Successfully");
-        navigate("/login")
-    }
     const fetchfiles = async () => {
     try {
         const res = await API.get("/my-projects");
@@ -24,7 +13,14 @@ function Dashboard(){
     } catch (err) {
         console.log("ERROR:", err.response?.data || err.message);
     }
-};
+    };
+    useEffect(()=>{
+        if(!token){
+            navigate("/login");
+            return;
+    }
+        fetchfiles();
+    },[token,navigate]);
     return (
     <div className="p-6">
         <h2 className="text-2xl font-bold mb-4">All Files</h2>
@@ -44,7 +40,6 @@ function Dashboard(){
                     </a>
                 </div>
             ))}
-            <button onClick={handlelogout}>Logout</button>
         </div>
     </div>
 );
