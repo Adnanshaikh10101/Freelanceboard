@@ -2,21 +2,37 @@ import { Link, } from "react-router-dom";
 import logo from "../assets/logo.png";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
+import { useEffect, useState } from "react";
+import API from "../services/api";
 
 function Navbar() {
+    const [client,Setclient]=useState(null);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("role");
+    const fetchclient = async()=>{
+        const res= await API.get("/dashboard");
+        Setclient(res.data.client);
+    }
     const handlelogout = ()=>{
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         navigate("/login");
         window.location.reload();
     }
+    useEffect(()=>{
+        if(token){
+            fetchclient();
+        }
+    },[token])
     return (
         <div className="navbar">
             <img src={logo} alt="logo" width="100"/>    
             <div className="nav-links">
+                {client &&(
+                    <p className="text-fuchsia-600 font-semibold">Welcome,{client.name}</p>
+                )
+            }
                 <Link to="/">Home</Link>
                 {role==="admin" ? (
                     <>
@@ -24,6 +40,7 @@ function Navbar() {
                     </>
                 ):(
                     <>
+                    <Link to="/upload">upload</Link>
                     </>
                 )
                 }
@@ -35,7 +52,8 @@ function Navbar() {
                     </>
                 ) : (
                     <>
-                    <button className="font-semibold bg-purple-600 w-40 rounded hover:bg-purple-700" onClick={handlelogout}>Logout</button>
+
+                    <button className="font-semibold bg-purple-600 w-40 rounded  hover:bg-purple-700" onClick={handlelogout}>Logout</button>
                     </>
                 )}
             </div>

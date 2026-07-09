@@ -1,25 +1,13 @@
 import React, { useState, useEffect } from "react";
 import API from "../services/api";
-import { Navigate } from "react-router-dom";
 import "../index.css";
 
 function Upload() {
     const [file, setfile] = useState(null);
     const [projects, setProjects] = useState([]);
     const [selectedProject, setSelectedProject] = useState("");
-    const [isAdmin, setIsAdmin] = useState(true);
 
-    const role = localStorage.getItem("role");
-
-    // ✅ ALWAYS call hooks
-    useEffect(() => {
-        if (role !== "admin") {
-            alert("Only Admin Can Access");
-            setIsAdmin(false);
-        } else {
-            fetchProjects();
-        }
-    }, [role]);
+    const token = localStorage.getItem("token");
 
     const fetchProjects = async () => {
         try {
@@ -33,6 +21,14 @@ function Upload() {
             console.log(err.response?.data);
         }
     };
+    
+    useEffect(() => {
+        if (!token) {
+            alert("Only Admin Can Access");
+        } else {
+            fetchProjects();
+        }
+    }, [token]);
 
     const handleupload = async () => {
         if (!file || !selectedProject) {
@@ -57,11 +53,6 @@ function Upload() {
             console.log(err.response?.data);
         }
     };
-
-    // ✅ Safe redirect AFTER hooks
-    if (!isAdmin) {
-        return <Navigate to="/dashboard" replace />;
-    }
 
     return (
         <div className="Upload">

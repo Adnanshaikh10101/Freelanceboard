@@ -3,9 +3,19 @@ import API from "../services/api";
 import {useNavigate } from "react-router-dom";
 import "../index.css";
 function Dashboard(){
+    const [client,setclient]=useState(null);
     const [files,setFiles]= useState([]);
     const navigate = useNavigate();
     const token = localStorage.getItem("token");
+    const fetchclient=async()=>{
+        try{
+            const res = await API.get("/dashboard");
+            console.log(res.data);
+            setclient(res.data.client);
+        }catch(err){
+            console.log(err);
+        }
+    }
     const fetchfiles = async () => {
     try {
         const res = await API.get("/my-projects");
@@ -20,10 +30,20 @@ function Dashboard(){
             return;
     }
         fetchfiles();
+        fetchclient();
     },[token,navigate]);
     return (
     <div className="p-6">
-        <h2 className="text-2xl font-bold mb-4">All Files</h2>
+        {client ? (
+                <div className="text-fuchsia-600 mb-4">
+                    <p className="text-lg font-semibold">
+                        Welcome, {client.name}
+                    </p>
+                </div>
+            ) : (
+                <p className="text-gray-500">Loading user...</p>
+            )}
+        <h2 className="text-2xl font-bold mb-4">All Files</h2> 
 
         <div className="grid grid-cols-3 gap-4">
             {files.map((file) => (

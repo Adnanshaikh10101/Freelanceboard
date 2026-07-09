@@ -3,7 +3,6 @@ const router = express.Router();
 const Client=require("../models/client");
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs");
-const client = require("../models/client");
 const auth = require("../middleware/auth");
 router.post("/register",async(req,res)=>{
     try{
@@ -55,10 +54,11 @@ router.post("/login",async(req,res)=>{
         res.status(500).json({error:err.message});
     }
 });
-router.get("/dashboard",auth,(req,res)=>{
+router.get("/dashboard",auth,async(req,res)=>{
+    const client = await Client.findById(req.client.id);
     res.json({
         msg:"Welcome To Dashboard",
-        client:req.client
+        client:client
     });
 });
 module.exports=router;

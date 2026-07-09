@@ -62,7 +62,7 @@ router.put("/update/:id", auth, async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-router.post("/upload/:id",auth,admin,upload.single("file"),async(req,res)=>{
+router.post("/upload/:id",auth,upload.single("file"),async(req,res)=>{
     try{
         const project = await Project.findById(req.params.id);
         project.file=req.file.filename;
