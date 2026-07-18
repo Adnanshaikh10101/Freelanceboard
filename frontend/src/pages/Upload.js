@@ -28,7 +28,7 @@ function Upload() {
         if (file) data.append("file", file);
 
         try {
-            const res = await API.post("/create-project", data, {
+            const res = await API.post("/create", data, {
                 headers: {
                     "Content-Type": "multipart/form-data"
                 }

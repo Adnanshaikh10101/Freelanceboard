@@ -5,7 +5,7 @@ const auth=require("../middleware/auth");
 const admin= require("../middleware/admin");
 const project = require("../models/project");
 const upload = require("../middleware/upload");
-router.post("/create",auth,async(req,res)=>{
+router.post("/create",auth,upload.single("file"),async(req,res)=>{
     try{
         const {title,description,budget}=req.body;
         const newproject = new Project({
