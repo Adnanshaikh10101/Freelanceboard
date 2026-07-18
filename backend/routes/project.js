@@ -12,7 +12,9 @@ router.post("/create",auth,async(req,res)=>{
             title,
             description,
             budget,
-            client:req.client.id
+            client:req.client.id,
+            userFile:req.file ? req.file.filename:null,
+            status:"submited"
         });
         await newproject.save();
         res.json({msg:"Project Created Successfully"});
@@ -38,7 +40,7 @@ router.get("/all",auth,admin,async(req,res)=>{
         res.status(500).json({error:err.message});
     }
 });
-router.put("/update/:id", auth, async (req, res) => {
+router.put("/update/:id", auth,admin, async (req, res) => {
     try {
         const { status ,title} = req.body;
 
@@ -62,7 +64,30 @@ router.put("/update/:id", auth, async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-router.post("/upload/:id",auth,upload.single("file"),async(req,res)=>{
+router.post("/upload-user",auth,upload.single("file"),async(req,res)=>{
+    try{
+        const project = await Project.findById(req.params.id);
+        if(!project){
+            return res.status(404).json({message:"Project Not Found"});
+        }
+        if(!req.file){
+            return res.state(404).json({message:"No file Uploaded"});
+        }
+        project.userFile=req.file.filename;
+        project.status="pending-review";
+
+        await project.save();
+        res.json({
+            msg:"File Uploaded Successfully",
+            file:project.userFile
+        });
+    }
+    catch(err){
+        console.log(err);   
+    }
+}
+)
+router.post("/upload/:id",auth,admin,upload.single("file"),async(req,res)=>{
     try{
         const project = await Project.findById(req.params.id);
         project.file=req.file.filename;

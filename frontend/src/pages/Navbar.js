@@ -47,7 +47,7 @@ function Navbar() {
                 <Link to="/dashboard">Dashboard</Link>
                 {!token ? (
                     <>
-                    <Link className="border rounded shadow w-32 text-center" to="/login">Login</Link>
+                    <Link className="border rounded shadow w-32 text-center hover:bg-purple-600" to="/login">Login</Link>
                     <Link className=" text-center bg-purple-600 w-40 rounded hover:bg-purple-700" to="/register">Sign Up</Link>
                     </>
                 ) : (

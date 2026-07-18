@@ -20,6 +20,9 @@ const projectSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:"clients"
     },
+    userFile:{
+        type:String
+    },
     file:{
       type:String  
     }

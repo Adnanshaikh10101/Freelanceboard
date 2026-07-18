@@ -1,84 +1,94 @@
-import React, { useState, useEffect } from "react";
 import API from "../services/api";
 import "../index.css";
+import { useState } from "react";
 
 function Upload() {
-    const [file, setfile] = useState(null);
-    const [projects, setProjects] = useState([]);
-    const [selectedProject, setSelectedProject] = useState("");
+    const [file, setFile] = useState(null);
+    const [form, setForm] = useState({
+        title: "",
+        description: "",
+        budget: ""
+    });
 
-    const token = localStorage.getItem("token");
-
-    const fetchProjects = async () => {
-        try {
-            const res = await API.get("/all", {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
-                }
-            });
-            setProjects(res.data);
-        } catch (err) {
-            console.log(err.response?.data);
-        }
+    const handlechange = (e) => {
+        setForm({ ...form, [e.target.name]: e.target.value });
     };
-    
-    useEffect(() => {
-        if (!token) {
-            alert("Only Admin Can Access");
-        } else {
-            fetchProjects();
-        }
-    }, [token]);
 
-    const handleupload = async () => {
-        if (!file || !selectedProject) {
-            alert("Select project and file");
-            return;
-        }
+    const handleFile = (e) => {
+        setFile(e.target.files[0]);
+    };
 
-        const formData = new FormData();
-        formData.append("file", file);
+    const handlesubmit = async (e) => {
+        e.preventDefault();
+
+        const data = new FormData(); // ✅ correct
+        data.append("title", form.title);
+        data.append("description", form.description);
+        data.append("budget", form.budget);
+        if (file) data.append("file", file);
 
         try {
-            const res = await API.post(`/upload/${selectedProject}`, formData, {
+            const res = await API.post("/create-project", data, {
                 headers: {
-                    "Content-Type": "multipart/form-data",
-                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                    "Content-Type": "multipart/form-data"
                 }
             });
 
-            alert("Uploaded Successfully");
-            console.log(res.data);
+            alert(res.data.msg);
+
+            // reset
+            setForm({ title: "", description: "", budget: "" });
+            setFile(null);
+
         } catch (err) {
-            console.log(err.response?.data);
+            console.log(err);
+            alert("Upload failed");
         }
     };
 
     return (
-        <div className="Upload">
-            <h2>Upload File</h2>
+        <div className="p-3">
+            <h1 className="text-2xl font-bold">Create Your Project Here</h1>
 
-            <select onChange={(e) => setSelectedProject(e.target.value)}>
-                <option value="">Select Project</option>
-                {projects.map((project) => (
-                    <option key={project._id} value={project._id}>
-                        {project.title}
-                    </option>
-                ))}
-            </select>
+            <form onSubmit={handlesubmit}>
+                
+                <label>Title </label>
+                <input
+                    name="title"
+                    className="mt-2 text-slate-950"
+                    placeholder="Enter Your Project Title"
+                    value={form.title}
+                    onChange={handlechange}
+                /><br/>
 
-            <br /><br />
+                <label>Description </label>
+                <input
+                    name="description"
+                    className="text-slate-900"
+                    placeholder="Enter Your Project description"
+                    value={form.description}
+                    onChange={handlechange}
+                /><br/>
 
-            <input
-                type="file"
-                onChange={(e) => setfile(e.target.files[0])}
-            />
+                <label>Budget </label>
+                <input
+                    name="budget"
+                    type="number"
+                    className="text-slate-900"
+                    placeholder="Enter Your Project Budget"
+                    value={form.budget}
+                    onChange={handlechange}
+                /><br/>
 
-            <br /><br />
+                <label>File </label>
+                <input
+                    type="file"
+                    className="text-slate-900"
+                    onChange={handleFile} // ✅ correct handler
+                /><br/>
 
-            <button onClick={handleupload}>
-                Upload
-            </button>
+                <button type="submit">Submit</button>
+            </form>
         </div>
     );
 }
