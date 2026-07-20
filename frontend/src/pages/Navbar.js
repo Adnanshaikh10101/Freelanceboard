@@ -36,7 +36,7 @@ function Navbar() {
                 <Link to="/">Home</Link>
                 {role==="admin" ? (
                     <>
-                    <Link to="/upload">Admin</Link>
+                    <Link to="/admin">Admin</Link>
                     </>
                 ):(
                     <>

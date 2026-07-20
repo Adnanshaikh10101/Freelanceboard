@@ -48,14 +48,14 @@ function Upload() {
 
     return (
         <div className="p-3">
-            <h1 className="text-2xl font-bold">Create Your Project Here</h1>
+            <h1 className="text-2xl font-bold">Create Your Project</h1>
 
-            <form onSubmit={handlesubmit}>
+            <form className="Form"onSubmit={handlesubmit}>
                 
                 <label>Title </label>
                 <input
                     name="title"
-                    className="mt-2 text-slate-950"
+                    className="mt-6 ml-14 p-2 border rounded shadow text-slate-950 w-96         "
                     placeholder="Enter Your Project Title"
                     value={form.title}
                     onChange={handlechange}
@@ -64,7 +64,7 @@ function Upload() {
                 <label>Description </label>
                 <input
                     name="description"
-                    className="text-slate-900"
+                    className="mt-2 ml-1 p-2 border rounded shadow text-slate-900 w-96"
                     placeholder="Enter Your Project description"
                     value={form.description}
                     onChange={handlechange}
@@ -74,20 +74,20 @@ function Upload() {
                 <input
                     name="budget"
                     type="number"
-                    className="text-slate-900"
+                    className="mt-2 p-2 ml-9 border rounded shadow text-slate-900 w-96"
                     placeholder="Enter Your Project Budget"
                     value={form.budget}
                     onChange={handlechange}
                 /><br/>
 
-                <label>File </label>
+                <label className="mr-20">File </label>
                 <input
                     type="file"
-                    className="text-slate-900"
+                    className="mt-2 justify-center fy-text-slate-900"
                     onChange={handleFile} // ✅ correct handler
                 /><br/>
 
-                <button type="submit">Submit</button>
+                <button className="Submit"type="submit">Submit</button>
             </form>
         </div>
     );

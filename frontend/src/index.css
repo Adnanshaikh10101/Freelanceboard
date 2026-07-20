@@ -68,6 +68,17 @@ code {
 .logout-btn:hover {
     background-color: #71eee8;
 }
+.Submit{
+    background:rgb(87, 7, 235);
+    border-radius: 4px;
+    padding:6px;
+    margin-top: 8px;
+    width:478px;
+}
+.Form{
+    padding:8px;
+    width:500px;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
