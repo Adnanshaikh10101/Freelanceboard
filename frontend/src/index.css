@@ -79,6 +79,7 @@ code {
     padding:8px;
     width:500px;
 }
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
