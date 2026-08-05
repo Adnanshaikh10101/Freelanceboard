@@ -1,4 +1,7 @@
 /* Navbar Container */
+html {
+  scroll-behavior: smooth;
+}
 body {
     background-color: #0f0258;
     margin:0;  
