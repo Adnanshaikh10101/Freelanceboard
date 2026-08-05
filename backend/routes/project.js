@@ -102,4 +102,21 @@ router.post("/upload/:id",auth,admin,upload.single("file"),async(req,res)=>{
         res.status(500).json({error:err.message});
     }
 });
+router.delete("/project/:id", async (req, res) => {
+  try {
+    const projectId = req.params.id;
+
+    const deletedProject = await Project.findByIdAndDelete(projectId);
+
+    if (!deletedProject) {
+      return res.status(404).json({ msg: "Project not found" });
+    }
+
+    res.json({ msg: "Project deleted successfully" });
+
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: "Server error" });
+  }
+});
 module.exports=router;

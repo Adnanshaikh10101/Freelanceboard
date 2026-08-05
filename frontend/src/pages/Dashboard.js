@@ -1,67 +1,134 @@
-import React,{useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import API from "../services/api";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../index.css";
-function Dashboard(){
-    const [client,setclient]=useState(null);
-    const [files,setFiles]= useState([]);
-    const navigate = useNavigate();
-    const token = localStorage.getItem("token");
-    const fetchclient=async()=>{
-        try{
-            const res = await API.get("/dashboard");
-            console.log(res.data);
-            setclient(res.data.client);
-        }catch(err){
-            console.log(err);
-        }
-    }
-    const fetchfiles = async () => {
+
+function Dashboard() {
+  const [client, setclient] = useState(null);
+  const [files, setFiles] = useState([]);
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  // ✅ Fetch Client
+  const fetchclient = async () => {
     try {
-        const res = await API.get("/my-projects");
-        setFiles(res.data);
+      const res = await API.get("/dashboard");
+      setclient(res.data.client);
     } catch (err) {
-        console.log("ERROR:", err.response?.data || err.message);
+      console.log(err);
     }
-    };
-    useEffect(()=>{
-        if(!token){
-            navigate("/login");
-            return;
+  };
+
+  // ✅ Fetch Projects
+  const fetchfiles = async () => {
+    try {
+      const res = await API.get("/my-projects");
+      setFiles(res.data);
+    } catch (err) {
+      console.log(err.response?.data || err.message);
     }
-        fetchfiles();
-        fetchclient();
-    },[token,navigate]);
-    return (
-    <div className="p-6">
+  };
+
+  // ✅ DELETE FUNCTION
+  const handleDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this project?");
+    if (!confirmDelete) return;
+
+    try {
+      await API.delete(`/project/${id}`); // 🔥 make sure backend route exists
+      setFiles(files.filter((file) => file._id !== id)); // update UI
+      alert("Project deleted successfully");
+    } catch (err) {
+      console.log(err.response?.data || err.message);
+      alert("Delete failed");
+    }
+  };
+
+  useEffect(() => {
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+    fetchfiles();
+    fetchclient();
+  }, [token, navigate]);
+
+  return (
+    <div className="min-h-screen bg-[#0a012f] text-white p-6">
+
+      {/* HEADER */}
+      <div className="max-w-6xl mx-auto mb-8">
         {client ? (
-                <div className="text-fuchsia-600 mb-4">
-                    <p className="text-lg font-semibold">
-                        Welcome, {client.name}
-                    </p>
-                </div>
-            ) : (
-                <p className="text-gray-500">Loading user...</p>
-            )}
-        <h2 className="text-2xl font-bold mb-4">All Files</h2> 
+          <h1 className="text-3xl font-bold">
+            Welcome, <span className="text-fuchsia-400">{client.name}</span> 👋
+          </h1>
+        ) : (
+          <p className="text-gray-400">Loading user...</p>
+        )}
+      </div>
 
-        <div className="grid grid-cols-3 gap-4">
-            {files.map((file) => (
-                <div className="p-4 border rounded shadow">
-                    <p className="font-semibold">{file.title}</p>
+      {/* TITLE */}
+      <div className="max-w-6xl mx-auto mb-6 flex justify-between items-center">
+        <h2 className="text-2xl font-semibold">Your Projects</h2>
 
-                    <a 
-                        className="text-blue-500"
-                        href={`http://localhost:5000/${file.path}`}
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        View
-                    </a>
-                </div>
-            ))}
-        </div>
+        <button
+          onClick={() => navigate("/upload")}
+          className="bg-fuchsia-600 hover:bg-fuchsia-700 px-5 py-2 rounded-lg font-medium transition"
+        >
+          + New Project
+        </button>
+      </div>
+
+      {/* PROJECT CARDS */}
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {files.length > 0 ? (
+          files.map((file) => (
+            <div
+              key={file._id}
+              className="bg-white/10 backdrop-blur-md p-5 rounded-xl shadow-lg hover:scale-105 transition"
+            >
+              <h3 className="text-xl font-bold mb-2 text-fuchsia-300">
+                {file.title}
+              </h3>
+
+              <p className="text-gray-300 text-sm mb-3">
+                {file.description || "No description provided"}
+              </p>
+
+              <p className="text-sm mb-2">
+                💰 Budget:{" "}
+                <span className="text-green-400 font-semibold">
+                  ₹{file.budget || "N/A"}
+                </span>
+              </p>
+
+              <p className="text-sm mb-4">
+                📌 Status:{" "}
+                <span className="text-yellow-400 capitalize">
+                  {file.status || "pending"}
+                </span>
+              </p>
+
+              {/* ❌ Removed View Button */}
+
+              {/* ✅ DELETE BUTTON */}
+              <button
+                onClick={() => handleDelete(file._id)}
+                className="w-full mt-2 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg text-sm font-medium transition"
+              >
+                Delete Project
+              </button>
+
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-400">No projects found.</p>
+        )}
+
+      </div>
     </div>
-);
+  );
 }
+
 export default Dashboard;
