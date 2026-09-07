@@ -58,7 +58,7 @@ function Home(){
     </div>
   </div>
 </section>
-<footer className="bg-[#07013a] text-gray-300 mt-10">
+<footer className="bg-[#0f0258] text-gray-300 mt-10">
   <div className="max-w-6xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
 
     {/* LOGO / ABOUT */}
