@@ -12,7 +12,7 @@ app.get("/",(req,res)=>{
 });
 app.use("/api",project);
 app.use("/api",routes);
-app.use("/uploads",express.static("upload"));
+app.use("/uploads",express.static("uploads"));
 mongoose.connect(process.env.MONGO_URI)
 .then(()=>console.log("Mongoose Working"))
 .catch(err=>console.log(err));

@@ -8,6 +8,19 @@ const [files,setfiles]=useState([])
 const navigate=useNavigate();
 const token=localStorage.getItem("token");
 
+const handledelete=async(id)=>{
+  const confirmdelete=window.confirm("Confirm Delete!");
+  if(!confirmdelete) return;
+  try{
+    await API.delete(`/project/${id}`);
+    setfiles(files.filter((file)=>file._id !==id));
+    alert("Project deleted Successfully");
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
 const Fetchclient=async()=>{
   try{
     const res=await API.get("/dashboard");
@@ -80,11 +93,25 @@ return(
                       {file.userFile}
                     </p>
                     )}
+                    <div className="flex gap-2">
+                      <a
+                      href={`https://localhost:5000/uploads/{file.userFile}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex-1 text-center text-sm bg-fuchsia-600 hover:bg-fuchsia-700 px-3 py-2 rounded-lg"
+                      >View</a>
+                      <button
+                        onClick={()=>handledelete(file._id)}
+                        className="flex-1 text-center text-sm bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg">
+                          Delete
+                      </button>
+                    </div>
                   </div>
                 ):(
-                  <div></div>
+                  <div><p>No File uploaded</p></div>
                 )}
               </div>
+
 
           ))):(<p>hi</p>)
         }
