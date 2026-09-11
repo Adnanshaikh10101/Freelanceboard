@@ -87,7 +87,7 @@ function Upload() {
                     onChange={handleFile} // ✅ correct handler
                 /><br/>
 
-                <button className="Submit"type="submit">Submit</button>
+                <button className="Submit" type="submit">Submit</button>
             </form>
         </div>
     );
