@@ -85,7 +85,7 @@ return(
                   <div className="mb-3">
                     {file.userFile.match(/\.(jpg|jpeg|png|gif)$/i) ? (
                       <img
-                      src={`https://localhost:5000/upload/${file.userFile}`}
+                      src={`http://localhost:5000/upload/${file.userFile}`}
                       alt="preview"
                       className="w-full h-32 object-cover rounded-md mb-2"></img>
                     )
@@ -95,7 +95,7 @@ return(
                     )}
                     <div className="flex gap-2">
                       <a
-                      href={`https://localhost:5000/uploads/{file.userFile}`}
+                      href={`http://localhost:5000/uploads/${file.userFile}`}
                       target="_blank"
                       rel="noreferrer"
                       className="flex-1 text-center text-sm bg-fuchsia-600 hover:bg-fuchsia-700 px-3 py-2 rounded-lg"
@@ -111,9 +111,7 @@ return(
                   <div><p>No File uploaded</p></div>
                 )}
               </div>
-
-
-          ))):(<p>hi</p>)
+          ))):(<p>Login</p>)
         }
       </div>
   </div>
