@@ -3,8 +3,12 @@ import bgimg from "../assets/hero.png";
 import { useNavigate } from "react-router-dom";
 function Home(){
     const navigate = useNavigate();
+    const token=localStorage.getItem("token");
     const handleHome = async() =>{
     navigate("/login");
+}
+const handlelogged=async()=>{
+  navigate("/upload")
 }
     return(
         <div className="">
@@ -14,7 +18,10 @@ function Home(){
             backgroundPosition:"center-right" }}>
             <div className="w-1/3 flex text-fuchsia-600 border-none p-2 h-36">
                 <h1 className="text-6xl font-extrabold font-mono text-white mr-80">Made Your Website
-                    <button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handleHome}>Get Started</button>
+                  {token ? 
+                  (<button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handlelogged}>Get Started</button>):
+                  (<button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handleHome}>Get Started</button>)}
+                    
                 </h1>
                 <h1 className="text-6xl font-extrabold font-mono text-white mx-72"><span className="text-6xl font-extrabold font-mono text-white whitespace-nowrap">At Very</span><br/>Low Cost</h1>
             </div>   
