@@ -1,6 +1,9 @@
 import "../index.css";
 import bgimg from "../assets/hero.png";
 import { useNavigate } from "react-router-dom";
+import computer from "../assets/computer.png";
+import coin from "../assets/coin.png";
+import thunder from "../assets/thunder.png";
 function Home(){
     const navigate = useNavigate();
     const token=localStorage.getItem("token");
@@ -36,8 +39,8 @@ const handlelogged=async()=>{
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
 
       {/* CARD 1 */}
-      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl hover:scale-105 transition duration-300 shadow-lg">
-        <div className="text-5xl mb-4">💻</div>
+      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg">
+        <div className="text-5xl mb-4"><img src={computer} alt="computer"></img></div>
         <h3 className="text-2xl font-bold mb-2">Dynamic Websites</h3>
         <p className="text-gray-300">
           Get fully responsive and modern websites built with the latest technologies.
@@ -45,8 +48,8 @@ const handlelogged=async()=>{
       </div>
 
       {/* CARD 2 */}
-      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl hover:scale-105 transition duration-300 shadow-lg">
-        <div className="text-5xl mb-4">💰</div>
+      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl s shadow-lg">
+        <div className="text-5xl mb-4"><img src={coin} alt="coin"></img></div>
         <h3 className="text-2xl font-bold mb-2">Affordable Price</h3>
         <p className="text-gray-300">
           High-quality work at budget-friendly prices suitable for everyone.
@@ -54,8 +57,8 @@ const handlelogged=async()=>{
       </div>
 
       {/* CARD 3 */}
-      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl hover:scale-105 transition duration-300 shadow-lg">
-        <div className="text-5xl mb-4">⚡</div>
+      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl  shadow-lg">
+        <div className="text-5xl mb-4"><img src={thunder} alt="thunder"></img></div>
         <h3 className="text-2xl font-bold mb-2">Fastest Delivery</h3>
         <p className="text-gray-300">
           Get your projects completed quickly without compromising quality.
@@ -102,7 +105,7 @@ const handlelogged=async()=>{
     <div>
       <h3 className="text-lg font-semibold text-white mb-3">Contact</h3>
       <p>Email: support@freelanceboard.com</p>
-      <p>Phone: +91 98765 43210</p>
+      <p>Phone: +91 9833236053</p>
 
       {/* SOCIAL ICONS */}
       <div className="flex gap-4 mt-4 text-xl">
