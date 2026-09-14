@@ -4,12 +4,14 @@ import API from "../services/api";
 import "../index.css";
 function Login(){
     const navigate = useNavigate();
+    const [error,seterror]=useState("");
     const [form ,setform] = useState({
         email:"",
         password:""
     });
     const handlelogin = async(e)=>{
         e.preventDefault();
+        seterror("");
         try{
             const res = await API.post("/login",form);
             localStorage.setItem("token",res.data.token);
@@ -18,7 +20,10 @@ function Login(){
             navigate("/dashboard");
         }
         catch(err){
-            console.log(err);
+            console.log(err.response?.data);
+            seterror(
+                err.response?.data?.message||"Something Went Wrong"
+            );
         }
     }
     return(
@@ -34,6 +39,9 @@ function Login(){
             placeholder="Enter Your Password" 
             type="password" 
             onChange={(e)=>setform({...form,password:e.target.value})}/><br/>
+            {error &&(
+                <p className="text-sm text-red-700">{error}</p>
+            )}
             <button className=" font-semibold bg-purple-600 w-80 border rounded shadow text-white p-2 border-none hover:bg-green-700" type="submit">Login</button>
         </div>  
         </form>
