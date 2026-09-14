@@ -40,7 +40,7 @@ function Login(){
             type="password" 
             onChange={(e)=>setform({...form,password:e.target.value})}/><br/>
             {error &&(
-                <p className="text-sm text-red-700">{error}</p>
+                <p className="text-sm text-red-700 font-bold mb-4">{error}</p>
             )}
             <button className=" font-semibold bg-purple-600 w-80 border rounded shadow text-white p-2 border-none hover:bg-green-700" type="submit">Login</button>
         </div>  
