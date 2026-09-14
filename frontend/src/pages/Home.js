@@ -13,9 +13,6 @@ function Home(){
 const handlelogged=async()=>{
   navigate("/upload")
 }
-const navigateinsta=async()=>{
-  navigate("https://www.youtube.com/")
-}
     return(
         <div className="">
         <div className="max-w-6xl mx-auto mt-10 border rounded-lg h-screen bg-cover p-4 flex" style={{
@@ -112,9 +109,9 @@ const navigateinsta=async()=>{
 
       {/* SOCIAL ICONS */}
       <div className="flex gap-4 mt-4 text-xl">
-        <span className="hover:text-fuchsia-400 cursor-pointer" onClick={navigateinsta}>🌐</span>
-        <span className="hover:text-fuchsia-400 cursor-pointer">🐦</span>
-        <span className="hover:text-fuchsia-400 cursor-pointer">💼</span>
+        <a className="hover:text-fuchsia-400 cursor-pointer" href="https://youtube.com" target="_blank" rel="noreferrer">🌐</a>
+        <a className="hover:text-fuchsia-400 cursor-pointer" href="https://www.youtube.com">🐦</a>
+        <a className="hover:text-fuchsia-400 cursor-pointer" href="https://www.youtube.com">💼</a>
       </div>
     </div>
 
