@@ -6,11 +6,11 @@ const projectSchema=new mongoose.Schema({
         type:String
     },
     description:{
-        type:String,
-        required:true
+        type:String
     },
     budget:{
-        type:Number
+        type:Number,
+        required:true
     },
     status:{
         type:String,
@@ -24,7 +24,8 @@ const projectSchema=new mongoose.Schema({
         type:String
     },
     file:{
-      type:String  
+      type:String,
+      required:true
     }
 },{timestamps:true});
 module.exports=mongoose.model("project",projectSchema);

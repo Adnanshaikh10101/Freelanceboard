@@ -8,6 +8,11 @@ const upload = require("../middleware/upload");
 router.post("/create",auth,upload.single("file"),async(req,res)=>{
     try{
         const {title,description,budget}=req.body;
+        if(!title||!description||!budget||!req.file){
+            return res.status(400).json({
+                msg:"All Field Required"
+            });
+        }
         const newproject = new Project({
             title,
             description,
@@ -20,7 +25,7 @@ router.post("/create",auth,upload.single("file"),async(req,res)=>{
         res.json({msg:"Project Created Successfully"});
     }
     catch(err){
-        res.status(500).json({error:err.message});
+        res.status(500).json({msg:err.message});
     }
 });
 router.get("/my-projects",auth,async(req,res)=>{
