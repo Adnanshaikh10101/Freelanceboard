@@ -59,7 +59,6 @@ function Upload() {
                     name="title"
                     className="mt-6 ml-14 p-2 border rounded shadow text-slate-950 w-96         "
                     placeholder="Enter Your Project Title"
-                    required
                     value={form.title}
                     onChange={handlechange}
                 /><br/>
@@ -79,7 +78,6 @@ function Upload() {
                     type="number"
                     className="mt-2 p-2 ml-9 border rounded shadow text-slate-900 w-96"
                     placeholder="Enter Your Project Budget"
-                    required
                     value={form.budget}
                     onChange={handlechange}
                 /><br/>
@@ -87,14 +85,13 @@ function Upload() {
                 <label className="mr-20">File </label>
                 <input
                     type="file"
-                    required
                     className="mt-2 justify-center fy-text-slate-900"
                     onChange={handleFile} // ✅ correct handler
                 /><br/>
                 {error && 
-                (<p className="text-sm fonmt-bold mb-4">{error}</p>)}
+                (<p className="text-center mt-4 text-sm font-bold text-red-700 mb-4">{error}</p>)}
 
-                <button className="Submit" type="submit">Submit</button>
+                <button className=" mt-1 Submit" type="submit">Submit</button>
             </form>
         </div>
     );

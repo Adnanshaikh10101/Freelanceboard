@@ -102,7 +102,13 @@ return(
                       >View</a>
                       <button
                         onClick={()=>handledelete(file._id)}
-                        className="flex-1 text-center text-sm bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg">
+                        disabled={file.status!=="submited"}
+                        className={`flex-1 text-center text-sm
+                        ${file.status!=="submited" ? 
+                          "bg-red-600 cursor-not-allowed opacity-50 py-2 px-3 rounded-lg "
+                          :
+                           "bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg"
+                        }`}>
                           Delete
                       </button>
                     </div>
