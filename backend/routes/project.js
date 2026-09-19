@@ -5,6 +5,7 @@ const auth=require("../middleware/auth");
 const admin= require("../middleware/admin");
 const project = require("../models/project");
 const upload = require("../middleware/upload");
+const client = require("../models/client");
 router.post("/create",auth,upload.single("file"),async(req,res)=>{
     try{
         const {title,description,budget}=req.body;
@@ -19,7 +20,7 @@ router.post("/create",auth,upload.single("file"),async(req,res)=>{
             budget,
             client:req.client.id,
             userFile:req.file ? req.file.filename:null,
-            status:"submited"
+            status:"pending"
         });
         await newproject.save();
         res.json({msg:"Project Created Successfully"});
@@ -36,13 +37,28 @@ router.get("/my-projects",auth,async(req,res)=>{
         res.status(500).json({error:err.msg});
     }
 });
-router.get("/all",auth,admin,async(req,res)=>{
+router.get("/admin/stats",auth,admin,async(req,res)=>{
     try{
-        const projects=await Project.find().populate("client","name email");
-        res.json(projects);
+        const TotalUser=await client.countDocuments();
+        const TotalProjects=await project.countDocuments();
+        const PendingProjects=await project.countDocuments({
+            status:"pending"
+        })
+        const InprogressProject=await project.countDocuments({
+            status:"Inprogress"
+        });
+        const Completed=await project.countDocuments({
+            status:"completed"
+        }) 
+        res.json({
+            users:TotalUser,
+            projects:TotalProjects,
+            pending:PendingProjects,
+            inprogress:InprogressProject,
+            completed:Completed
+        })
     }catch(err){
-        console.log(err);
-        res.status(500).json({error:err.message});
+        console.log(err)
     }
 });
 router.put("/update/:id", auth,admin, async (req, res) => {

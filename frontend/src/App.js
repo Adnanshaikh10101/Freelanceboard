@@ -6,11 +6,13 @@ import ProtectRoute from "./components/ProtectedRoute";
 import Dashboard from "./pages/Dashboard";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
+import Admin from "./pages/Admin";
 function App(){
   return(
   <BrowserRouter>
   <Navbar/>
   <Routes>
+    <Route path="/Admin" element={<Admin/>}></Route>
     <Route path="/" element={<Home/>}/>
     <Route path="/upload" element={
       <ProtectRoute><Upload/></ProtectRoute>}/>
