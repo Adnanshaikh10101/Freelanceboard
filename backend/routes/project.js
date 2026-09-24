@@ -140,4 +140,18 @@ router.delete("/project/:id", async (req, res) => {
     res.status(500).json({ msg: "Server error" });
   }
 });
+router.get("/admin/projects", auth, admin, async (req, res) => {
+    try {
+        const projects = await Project.find()
+            .sort({ _id: -1 });
+
+        res.json(projects);
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            msg: "Failed to fetch projects"
+        });
+    }
+});
 module.exports=router;

@@ -7,11 +7,13 @@ import Dashboard from "./pages/Dashboard";
 import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
+import AdminProjects from "./pages/AdminProjects";
 function App(){
   return(
   <BrowserRouter>
   <Navbar/>
   <Routes>
+    <Route path="/admin/projects" element={<AdminProjects/>}></Route>
     <Route path="/Admin" element={<Admin/>}></Route>
     <Route path="/" element={<Home/>}/>
     <Route path="/upload" element={
