@@ -42,13 +42,13 @@ router.get("/admin/stats",auth,admin,async(req,res)=>{
         const TotalUser=await client.countDocuments();
         const TotalProjects=await project.countDocuments();
         const PendingProjects=await project.countDocuments({
-            status:"pending"
+            status:"Submitted"
         })
         const InprogressProject=await project.countDocuments({
-            status:"Inprogress"
+            status:"In Progress"
         });
         const Completed=await project.countDocuments({
-            status:"completed"
+            status:"Completed"
         }) 
         res.json({
             users:TotalUser,
@@ -142,8 +142,7 @@ router.delete("/project/:id", async (req, res) => {
 });
 router.get("/admin/projects", auth, admin, async (req, res) => {
     try {
-        const projects = await Project.find()
-            .sort({ _id: -1 });
+        const projects = await Project.find().populate("client", "name email");
 
         res.json(projects);
 
@@ -151,6 +150,32 @@ router.get("/admin/projects", auth, admin, async (req, res) => {
         console.log(err);
         res.status(500).json({
             msg: "Failed to fetch projects"
+        });
+    }
+});
+router.delete("/admin/user/:id",auth,admin,async(req,res)=>{
+    try{
+        const user_id=req.params.id;
+        const user=await client.findById(user_id)
+        if(!user){
+            return res.status(404).json({
+                msg:"User Not Found"
+            });
+        }
+        if(user.isAdmin){
+            return res.status(403).json({
+                msg:"Admin User Cannot be Deleted"
+            });
+        }
+        await client.findByIdAndDelete(user_id);
+        res.json({
+            msg:"User Deleted Successful"
+        });
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).json({
+            msg:"Server Error"
         });
     }
 });

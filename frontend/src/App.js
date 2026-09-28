@@ -8,11 +8,13 @@ import Navbar from "./pages/Navbar";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import AdminProjects from "./pages/AdminProjects";
+import AdminUsers from "./pages/AdminUsers";
 function App(){
   return(
   <BrowserRouter>
   <Navbar/>
   <Routes>
+    <Route path="/admin/users" element={<AdminUsers/>}></Route>
     <Route path="/admin/projects" element={<AdminProjects/>}></Route>
     <Route path="/Admin" element={<Admin/>}></Route>
     <Route path="/" element={<Home/>}/>

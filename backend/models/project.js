@@ -14,7 +14,7 @@ const projectSchema=new mongoose.Schema({
     },
     status:{
         type:String,
-        default:"pending"
+        default:"Submitted"
     },
     client:{
         type:mongoose.Schema.Types.ObjectId,

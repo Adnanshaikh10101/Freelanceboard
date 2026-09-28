@@ -4,6 +4,7 @@ const Client=require("../models/client");
 const jwt=require("jsonwebtoken");
 const bcrypt=require("bcryptjs");
 const auth = require("../middleware/auth");
+const admin =require("../middleware/admin");
 router.post("/register",async(req,res)=>{
     try{
         const {name,email,password}=req.body;
@@ -60,5 +61,16 @@ router.get("/dashboard",auth,async(req,res)=>{
         msg:"Welcome To Dashboard",
         client:client
     });
+});
+router.get("/admin/user",auth,admin,async(req,res)=>{
+    try{
+        const user =await Client.find().select("-password");
+        res.json(user)
+    }catch(err){
+        console.log(err)
+        res.status(500).json({
+            msg:"server error"
+        });
+    }
 });
 module.exports=router;

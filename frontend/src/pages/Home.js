@@ -22,8 +22,8 @@ const handlelogged=async()=>{
             <div className="w-1/3 flex text-fuchsia-600 border-none p-2 h-36">
                 <h1 className="text-6xl font-extrabold font-mono text-white mr-80">Made Your Website
                   {token ? 
-                  (<button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handlelogged}>Get Started</button>):
-                  (<button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handleHome}>Get Started</button>)}
+                  (<button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handlelogged}>+ Create</button>):
+                  (<button className="rounded bg-fuchsia-600 font-bold text-2xl p-3" onClick={handleHome}>Login</button>)}
                     
                 </h1>
                 <h1 className="text-6xl font-extrabold font-mono text-white mx-72"><span className="text-6xl font-extrabold font-mono text-white whitespace-nowrap">At Very</span><br/>Low Cost</h1>
@@ -39,7 +39,7 @@ const handlelogged=async()=>{
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
 
       {/* CARD 1 */}
-      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl shadow-lg">
+      <div className="p-6 rounded-xl shadow-lg">
         <div className="text-5xl mb-4"><img src={computer} alt="computer"></img></div>
         <h3 className="text-2xl font-bold mb-2">Dynamic Websites</h3>
         <p className="text-gray-300">
@@ -48,7 +48,7 @@ const handlelogged=async()=>{
       </div>
 
       {/* CARD 2 */}
-      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl s shadow-lg">
+      <div className=" p-6 rounded-xl s shadow-lg">
         <div className="text-5xl mb-4"><img src={coin} alt="coin"></img></div>
         <h3 className="text-2xl font-bold mb-2">Affordable Price</h3>
         <p className="text-gray-300">
@@ -57,7 +57,7 @@ const handlelogged=async()=>{
       </div>
 
       {/* CARD 3 */}
-      <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl  shadow-lg">
+      <div className=" p-6 rounded-xl  shadow-lg">
         <div className="text-5xl mb-4"><img src={thunder} alt="thunder"></img></div>
         <h3 className="text-2xl font-bold mb-2">Fastest Delivery</h3>
         <p className="text-gray-300">

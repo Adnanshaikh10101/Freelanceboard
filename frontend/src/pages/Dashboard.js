@@ -104,7 +104,7 @@ return(
                         onClick={()=>handledelete(file._id)}
                         disabled={file.status!=="submited"}
                         className={`flex-1 text-center text-sm
-                        ${file.status!=="submited" ? 
+                        ${file.status!=="Submitted" ? 
                           "bg-red-600 cursor-not-allowed opacity-50 py-2 px-3 rounded-lg "
                           :
                            "bg-red-600 hover:bg-red-700 px-3 py-2 rounded-lg"

@@ -27,7 +27,7 @@ function AdminProjects() {
 
     useEffect(() => {
         fetchProjects();
-    }, []);
+    });
 
     const deleteProject = async (id) => {
         const confirmDelete = window.confirm(
@@ -54,43 +54,26 @@ function AdminProjects() {
         }
     };
 
-    const updateProject = async (project) => {
-        const title = window.prompt(
-            "Enter project title:",
-            project.title
+    const updateProject = async (id, status) => {
+    try {
+        await API.put(`/update/${id}`, {
+            status: status
+        });
+
+        alert("Project status updated successfully");
+
+        fetchProjects();
+
+    } catch (err) {
+        console.log(err.response?.data || err.message);
+
+        alert(
+            err.response?.data?.msg ||
+            err.response?.data?.error ||
+            "Failed to update project"
         );
-
-        if (title === null || title.trim() === "") {
-            return;
-        }
-
-        const status = window.prompt(
-            "Enter status: pending / Inprogress / Completed",
-            project.status
-        );
-
-        if (status === null || status.trim() === "") {
-            return;
-        }
-
-        try {
-            await API.put(`/update/${project._id}`, {
-                title: title,
-                status: status
-            });
-
-            alert("Project updated successfully");
-
-            fetchProjects();
-        } catch (err) {
-            console.log(err.response?.data || err.message);
-
-            alert(
-                err.response?.data?.error ||
-                "Failed to update project"
-            );
-        }
-    };
+    }
+};
 
     const uploadProject = async (id, file) => {
         if (!file) {
@@ -206,11 +189,17 @@ function AdminProjects() {
                                     </p>
 
                                     <p>
-                                        <span className="text-gray-400">
+                                       <span className="text-gray-400">
                                             Client:
                                         </span>{" "}
-                                        {project.client}
+                                        {project.client.name}
                                     </p>
+                                    <p>
+                                       <span className="text-gray-400">
+                                            Client:
+                                        </span>{" "}
+                                        {project.client.email}
+                                    </p>  
 
                                     <p>
                                         <span className="text-gray-400">
@@ -245,14 +234,25 @@ function AdminProjects() {
 
                                 <div className="flex flex-wrap gap-3 mt-6">
 
-                                    <button
-                                        onClick={() =>
-                                            updateProject(project)
+                                    <select
+                                        value={project.status}
+                                        onChange={(e) =>
+                                            updateProject(project._id, e.target.value)
                                         }
-                                        className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-lg"
+                                        className="bg-blue-600 text-white px-4 py-2 rounded-lg cursor-pointer outline-none"
                                     >
-                                        ✏️ Update
-                                    </button>
+                                        <option value="Submitted">
+                                            Submitted
+                                        </option>
+
+                                        <option value="In Progress">
+                                            In Progress
+                                        </option>
+
+                                        <option value="Completed">
+                                            Completed
+                                        </option>
+                                    </select>    
 
                                     <label className="bg-green-600 hover:bg-green-700 px-4 py-2 rounded-lg cursor-pointer">
 

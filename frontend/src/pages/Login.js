@@ -31,11 +31,11 @@ function Login(){
             <div className="p-12 text-center mt-24 w-full">
             <h2 className="text-2xl  font-bold mb-4">LOGIN</h2>
             <input 
-            className="p-2 border rounded shadow w-80 mb-6 font-semibold text-black" 
+            className="p-2 border rounded shadow w-80 mb-6 font-thin-semibold text-black" 
             placeholder="Enter Your Email" 
             onChange={(e)=>setform({...form,email:e.target.value})}/><br/>
             <input 
-            className="p-2 border rounded shadow w-80 mb-6 font-semibold text-black" 
+            className="p-2 border rounded shadow w-80 mb-6 font-thin-semibold text-black" 
             placeholder="Enter Your Password" 
             type="password" 
             onChange={(e)=>setform({...form,password:e.target.value})}/><br/>
